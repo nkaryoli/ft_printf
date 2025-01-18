@@ -6,8 +6,10 @@
 #    By: knieves- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/18 17:30:00 by knieves-          #+#    #+#              #
-#    Updated: 2025/01/18 17:30:15 by knieves-         ###   ########.fr        #
+#    Updated: 2025/01/18 19:48:35 by knieves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
+
+#https://www.youtube.com/watch?v=byRw36Y3Hjs
