@@ -6,7 +6,7 @@
 /*   By: knieves- <knieves-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:03:06 by knieves-          #+#    #+#             */
-/*   Updated: 2025/01/21 18:58:46 by knieves-         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:11:56 by knieves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	print_format(char specifier, va_list ap)
 	if (specifier == 's')
 		count += print_str(va_arg(ap, char *));
 	if (specifier == 'p')
-		count += print_ptr_to_hexa((long)va_arg(ap, uintptr_t));
+		count += print_ptr_to_hexa(va_arg(ap, uintptr_t));
 	if (specifier == 'd')
 		count += print_digits((long)va_arg(ap, int), 10);
 	if (specifier == 'i')
@@ -32,7 +32,7 @@ int	print_format(char specifier, va_list ap)
 	if (specifier == 'x')
 		count += print_digits((long)va_arg(ap, unsigned int), 16);
 	if (specifier == 'X')
-		count += print_digits_hexa((long)va_arg(ap, unsigned int), 16);
+		count += print_digits_hexa((long)va_arg(ap, unsigned int));
 	if (specifier == '%')
 		count += print_char('%');
 	return (count);
@@ -40,18 +40,17 @@ int	print_format(char specifier, va_list ap)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	ap; // objeto que contendra los argumentos para iterer luego.
-	int	count; // contador de los caracteres a imprimir
+	va_list	ap;
+	int		count;
 
-	va_start(ap, format); // inizializo ap con el pointer al 2do argumento.
+	va_start(ap, format);
 	count = 0;
 	while (*format != '\0')
 	{
-		if (*format == '%') // consigo el % para identificar el type.
+		if (*format == '%')
 		{
 			format++;
-			count += print_format(*format, ap); 
-				// paso el especifier que me dara el type.
+			count += print_format(*format, ap);
 		}
 		else
 			count += write(1, format, 1);
@@ -68,6 +67,7 @@ int	main(void)
 	int	i = -157;
 	int	d = 3879;
 	int	n = 95;
+	int	*p = &n;
 
 	count = ft_printf("Single caracter: %c\n", c);
         ft_printf("los caracteres escritos son %d\n", count);
@@ -109,5 +109,11 @@ int	main(void)
 	ft_printf("los caracteres escritos son %d\n", count);
 	count = printf("%%\n");
 	ft_printf("los caracteres escritos son %d\n", count);
+
+        count = ft_printf("%p\n", (void *)p);
+        ft_printf("los caracteres escritos son %d\n", count);
+        count = printf("%p\n", (void *)p);
+        ft_printf("los caracteres escritos son %d\n", count);
+
 	return (0);
 }
