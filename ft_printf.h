@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knieves- <knieves-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:58:22 by knieves-          #+#    #+#             */
-/*   Updated: 2025/01/21 21:12:44 by knieves-         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:29:50 by knieves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <stdint.h>
+# include <stdint.h>
 
 int	ft_printf(const char *format, ...);
 int	print_format(char specifier, va_list ap);

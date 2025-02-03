@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knieves- <knieves-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:10:44 by knieves-          #+#    #+#             */
-/*   Updated: 2025/01/21 21:15:46 by knieves-         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:25:23 by knieves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-int	print_char(int j)
-{
-	return (write(1, &j, 1));
-}
+#include "ft_printf.h"
 
 int	print_str(char *str)
 {
 	int	count;
 
+	if (str == NULL)
+		return (write(1, "(null)", 6));
 	count = 0;
 	while (*str)
 	{
@@ -72,14 +69,32 @@ int	print_digits_hexa(long num)
 	}
 }
 
+int	print_unsigned_digits(unsigned long num, int base)
+{
+	int		count;
+	char	*symbols;
+
+	count = 0;
+	symbols = "0123456789abcdef";
+	if (num < (unsigned long)base)
+	{
+		return (print_char(symbols[num]));
+	}
+	else
+	{
+		count = print_unsigned_digits(num / base, base);
+		return (count + print_unsigned_digits(num % base, base));
+	}
+}
+
 int	print_ptr_to_hexa(uintptr_t ptr)
 {
 	int	count;
 
-	count = 0;
 	if (ptr == 0)
-		return (print_str("0x0"));
+		return (write(1, "(nil)", 5));
+	count = 0;
 	count += print_str("0x");
-	count += print_digits(ptr, 16);
+	count += print_unsigned_digits((unsigned long)ptr, 16);
 	return (count);
 }
